@@ -37,9 +37,24 @@ class ViewController: UIViewController {
         scrollView.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "H:|[stackView]|", options: NSLayoutConstraint.FormatOptions.alignAllCenterX, metrics: nil, views: ["stackView": stackView]))
         scrollView.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|[stackView]", options: NSLayoutConstraint.FormatOptions.alignAllCenterX, metrics: nil, views: ["stackView": stackView]))
         
-        for _ in 1 ..< 50 {
-            let imageView = UIImageView(image: UIImage(named: "testPhoto"))
-            stackView.addArrangedSubview(imageView)
+        for i in 1...51 {
+ //           let imageView = UIImageView(image: UIImage(named: "testPhoto"))
+
+            let view = UIButton(type: .roundedRect)
+ //           let view = UIButton(frame: CGRect(x: 0, y: 0, width: 74  , height: 74))
+            view.widthAnchor.constraint(equalToConstant: 74).isActive = true
+            view.heightAnchor.constraint(equalTo: view.widthAnchor, multiplier: 1.0).isActive = true
+            view.setTitle(String(i), for: .normal)
+            view.setTitleColor( UIColor.red, for: .normal)
+            view.backgroundColor = UIColor.lightGray
+
+//            view.widthAnchor.constraint(equalToConstant: 76).isActive = true
+//            view.heightAnchor.constraint(equalToConstant: 76).isActive = true
+//            let label = UILabel(frame: CGRect.zero)
+//            label.text = String(i)
+//            label.textColor = UIColor.red
+   //         view.addSubview(label)
+            stackView.addArrangedSubview(view)
         }
     }
     
