@@ -19,21 +19,17 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-
         scrollView = UIScrollView()
         scrollView.translatesAutoresizingMaskIntoConstraints = false
         stackviewPlaceholderView.addSubview(scrollView)
-        
     view.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "H:|[scrollView]|", options: .alignAllCenterX, metrics: nil, views: ["scrollView": scrollView]))
     view.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|[scrollView]|", options: .alignAllCenterX, metrics: nil, views: ["scrollView": scrollView]))
     
-        
         stackView = UIStackView()
         stackView.translatesAutoresizingMaskIntoConstraints = false
         stackView.axis = .horizontal
         stackView.spacing = 10
         scrollView.addSubview(stackView)
-        
     scrollView.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "H:|[stackView]|", options: NSLayoutConstraint.FormatOptions.alignAllCenterX, metrics: nil, views: ["stackView": stackView]))
     scrollView.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|[stackView]", options: NSLayoutConstraint.FormatOptions.alignAllCenterX, metrics: nil, views: ["stackView": stackView]))
     
@@ -60,12 +56,19 @@ class ViewController: UIViewController {
     }
     
     @IBAction func buttonPressed(_ sender: UIButton) {
-        sender.isHidden = true
+        let duration = 0.25
+        UIView.animate(withDuration: duration, animations: {
+            sender.alpha = 0.0
+            sender.isHidden = true
+      }) { (finished) in
+        self.stackView.layoutIfNeeded()
+       }
     }
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         scrollView.contentSize = CGSize(width: stackView.frame.width, height: stackView.frame.height)
+        print("viewDidLayoutSubviews: stack view size = ( \(stackView.frame.width) , \(stackView.frame.height) " )
     }
 }
 
